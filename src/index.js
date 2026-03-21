@@ -3,8 +3,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
   signOut,
+  sendEmailVerification,
 } from "firebase/auth";
 import {
   writeBatch,
@@ -23,6 +23,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import usersData from "./data/user.json" with { type: "json" };
+import { createMovie } from "@dataconnect/generated";
 
 const firebaseConfig = {
   apiKey: "AIzaSyABBvW0pfykgQkMcJGZXNSYULnL1Q29znk",
@@ -139,7 +140,7 @@ async function register() {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
-      "eduardo12978@test.com",
+      "eduardo12978@yopmail.com",
       "123456",
     );
     console.log("usuario creado", userCredential.user);
@@ -160,7 +161,7 @@ async function register() {
 }
 
 async function login() {
-  await signInWithEmailAndPassword(auth, "eduardo12978@test.com", "123456");
+  await signInWithEmailAndPassword(auth, "eduardo12978@yopmail.com", "123456");
   console.log("usuario logueado");
 }
 
@@ -187,10 +188,37 @@ const unsuscribe = onSnapshot(collection(db, "users"), (snapshot) => {
   });
 });
 
+async function sendInvitationEmailUser(params) {
+  try {
+    console.log("auth ", auth);
+    await sendEmailVerification(auth.currentUser);
+    console.log("enviado");
+  } catch (error) {
+    console.log("error ", error);
+  }
+}
+
+async function createMovieData() {
+  try {
+    const result = await createMovie({
+      title: "Spiderman",
+      genre: "accion",
+      imageUrl: "https://chatgpt.com/c/69b583d1-205c-8325-bf9b-c509e7f77455",
+    });
+    console.log("crear movie", result);
+  } catch (error) {
+    console.log("error al crear ", error);
+  }
+}
+
 unsuscribe();
 
 async function main() {
-  await updatePost();
+  // await updatePost();
+  // await register();
+ // await login();
+  // await sendInvitationEmailUser();
+  // await createMovieData();
 }
 
 main();
