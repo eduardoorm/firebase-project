@@ -5,6 +5,10 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+    "hosting": {
+    "target": "learn",
+    "public": "dist"
+  },
   "dataconnect": {
     "source": "dataconnect"
   },

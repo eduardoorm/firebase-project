@@ -30,6 +30,8 @@
 
     "@dataconnect/generated": "file:src/dataconnect-generated",
 
+    "express": "^5.2.1",
+
     "firebase": "^12.10.0"
 
   },

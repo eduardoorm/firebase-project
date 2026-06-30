@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -29,7 +30,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyABBvW0pfykgQkMcJGZXNSYULnL1Q29znk",
   authDomain: "myproject-63a54.firebaseapp.com",
   projectId: "myproject-63a54",
-  storageBucket: "myproject-63a54.firebasestorage.app",
+  storageBucket: "fire-conference-eormeno.firebasestorage.app",
   messagingSenderId: "730668236613",
   appId: "1:730668236613:web:3d8925761e36c53b6ac82c",
   measurementId: "G-PHTQ5WC9T4",
@@ -213,12 +214,30 @@ async function createMovieData() {
 
 unsuscribe();
 
+async function storageObjects() {
+  try {
+    const storage = getStorage(app);
+
+    const response = await fetch("./assets/foto.jpg");
+    const fileBuffer = await response.blob();
+    const myref = ref(storage, `images/foto.jpg`);
+    await uploadBytes(myref, fileBuffer);
+    const url = await getDownloadURL(myref);
+    console.log("Archivo subido correctamente:", myref.fullPath);
+    console.log("url ", url);
+    return url;
+  } catch (error) {
+    console.log("error storage", error);
+  }
+}
+
 async function main() {
   // await updatePost();
   // await register();
- // await login();
+  // await login();
   // await sendInvitationEmailUser();
   // await createMovieData();
+  //await storageObjects();
 }
 
 main();

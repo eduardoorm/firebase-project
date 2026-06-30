@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "fire-conference-eormeno"
-  }
+  },
+  "targets": {
+    "fire-conference-eormeno": {
+      "hosting": {
+        "learn": [
+          "only-learn-3cc8d"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
