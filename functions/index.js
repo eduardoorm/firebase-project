@@ -39,6 +39,11 @@ app.delete("/user", (req, res) => {
 
 exports.api = functions.https.onRequest(app);
 
+exports.helloWorld = functions.https.onRequest((request, response) => {
+  functions.logger.info("Hello logs!", { structuredData: true });
+  response.send("Hello from Firebase!");
+});
+
 exports.createUser = functions.https.onRequest(async (req, res) => {
   const { email, password, name } = req.body;
 
