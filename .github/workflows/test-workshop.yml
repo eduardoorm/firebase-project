@@ -6,4 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: forzando error
+        if: failure()
         run: exit 1
+      - name: forzando error dos
+        if: always()
+        run: echo "hellooo"
