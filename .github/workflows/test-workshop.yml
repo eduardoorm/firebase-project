@@ -1,0 +1,11 @@
+name: nuevoAction
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  primer-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: forzando error
+        run: exit 1
